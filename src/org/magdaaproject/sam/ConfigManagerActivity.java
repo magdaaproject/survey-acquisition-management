@@ -274,9 +274,6 @@ public class ConfigManagerActivity extends Activity implements OnClickListener {
 	 */
 	public void cleanDatabase() {
 		
-		//debug code
-		Log.d(sLogTag, "cleaning database");
-		
 		contentResolver.delete(ConfigsContract.CONTENT_URI, null, null);
 		contentResolver.delete(FormsContract.CONTENT_URI, null, null);
 		contentResolver.delete(CategoriesContract.CONTENT_URI, null, null);
