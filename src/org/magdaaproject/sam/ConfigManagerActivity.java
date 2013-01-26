@@ -39,6 +39,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -197,12 +198,11 @@ public class ConfigManagerActivity extends Activity implements OnClickListener {
 
 	/**
 	 * convenience method to delete any existing config from the database
-	 * @return true on success, false on failure
+	 * synonym for cleanDatabase() method
 	 */
 	public void deleteExistingConfig() throws SQLException {
 
-		contentResolver.delete(ConfigsContract.CONTENT_URI, null, null);
-		contentResolver.delete(FormsContract.CONTENT_URI, null, null);
+		cleanDatabase();
 
 	}
 	
@@ -261,14 +261,22 @@ public class ConfigManagerActivity extends Activity implements OnClickListener {
 	 */
 	public void emptyOdkDatabases() {
 		
-		contentResolver.delete(FormsProviderAPI.FormsColumns.CONTENT_URI, null, null);
-		contentResolver.delete(InstanceProviderAPI.InstanceColumns.CONTENT_URI, null, null);
+		try {
+			contentResolver.delete(FormsProviderAPI.FormsColumns.CONTENT_URI, null, null);
+			contentResolver.delete(InstanceProviderAPI.InstanceColumns.CONTENT_URI, null, null);
+		} catch (SQLiteException e) {
+			Log.w(sLogTag, "error thrown while trying to empty ODK database", e);
+		}
 	}
 	
 	/**
 	 * clean the MaGDAA SAM database
 	 */
 	public void cleanDatabase() {
+		
+		//debug code
+		Log.d(sLogTag, "cleaning database");
+		
 		contentResolver.delete(ConfigsContract.CONTENT_URI, null, null);
 		contentResolver.delete(FormsContract.CONTENT_URI, null, null);
 		contentResolver.delete(CategoriesContract.CONTENT_URI, null, null);

@@ -267,6 +267,18 @@ public class LauncherActivity extends Activity implements OnClickListener {
 	
 	/*
 	 * (non-Javadoc)
+	 * @see android.app.Activity#onResume()
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		// populate the UI
+		populateUserInterface();
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	@Override
