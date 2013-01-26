@@ -195,16 +195,6 @@ public class ConfigManagerActivity extends Activity implements OnClickListener {
 		cursor.close();
 		
 	}
-
-	/**
-	 * convenience method to delete any existing config from the database
-	 * synonym for cleanDatabase() method
-	 */
-	public void deleteExistingConfig() throws SQLException {
-
-		cleanDatabase();
-
-	}
 	
 	/**
 	 * method used to import new config values 
