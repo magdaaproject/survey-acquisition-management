@@ -118,6 +118,7 @@
     <string name="system_file_path_configs">/magdaaproject/sam/configs/</string>
     <string name="system_file_path_icons">/magdaaproject/sam/icons/</string>
     <string name="system_file_config_extension">config.sam.magdaa</string>
+    <string name="system_file_instance_extension">.instance.sam.magdaa</string>
     
     <string name="system_file_path_odk">/odk/</string>
     <string name="system_file_path_odk_forms">/odk/forms/</string>
