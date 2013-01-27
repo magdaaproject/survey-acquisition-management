@@ -115,16 +115,20 @@ public class SurveyFormsActivity extends Activity implements OnClickListener {
 		gridView = (GridView)findViewById(R.id.survey_forms_ui_grid);
 		
 		// setup the cursor
-		String[] mProjection = new String[3];
+		String[] mProjection = new String[4];
 		mProjection[0] = FormsContract.Table._ID;
 		mProjection[1] = FormsContract.Table.TITLE;
 		mProjection[2] = FormsContract.Table.XFORMS_FILE;
+		mProjection[3] = FormsContract.Table.USES_LOCATION;
 		
 		String mSelection = FormsContract.Table.CATEGORY_ID + " = ?";
+		mSelection += " AND " + FormsContract.Table.FOR_DISPLAY + " = ?";
 		
-		String[] mSelectionArgs = new String[1];
+		String[] mSelectionArgs = new String[2];
 		mSelectionArgs[0] = categoryId;
+		mSelectionArgs[1] = Integer.toString(FormsContract.YES);
 		
+		// TODO have a preference for different sort order
 		String mSortOrder = FormsContract.Table.FORM_ID + " ASC";
 		
 		// get the data
