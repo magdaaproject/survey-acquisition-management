@@ -456,6 +456,7 @@ public class ConfigLoaderTask extends AsyncTask<Void, Integer, Integer> {
 			progressBar.setVisibility(View.GONE);
 			textView.setVisibility(View.GONE);
 			context.refreshDisplay();
+			context.verifyForms();
 			break;
 		}
     }
