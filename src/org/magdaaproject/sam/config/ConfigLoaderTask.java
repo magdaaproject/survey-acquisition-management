@@ -1,5 +1,5 @@
 /*
-android:layout_toRightOf="@id/list_view_category_icon" * Copyright (C) 2012, 2013 The MaGDAA Project
+ * Copyright (C) 2012, 2013 The MaGDAA Project
  *
  * This file is part of the MaGDAA SAM Software
  *
@@ -269,8 +269,8 @@ public class ConfigLoaderTask extends AsyncTask<Void, Integer, Integer> {
 			FileUtils.recursiveDelete(mOdkPath);
 			
 			// recreate directories			
-			mOdkPath = Environment.getExternalStorageDirectory().getPath();
-			mOdkPath += context.getString(R.string.system_file_path_odk_instances);
+//			mOdkPath = Environment.getExternalStorageDirectory().getPath();
+//			mOdkPath += context.getString(R.string.system_file_path_odk_instances);
 			
 			// don't delete metadata directory as 
 			// odk process has locked the database files
@@ -281,6 +281,7 @@ public class ConfigLoaderTask extends AsyncTask<Void, Integer, Integer> {
 			// empty the database tables via odk instead
 			context.emptyOdkDatabases();
 			
+			// reset the ODK path variable
 			mOdkPath = Environment.getExternalStorageDirectory().getPath();
 			mOdkPath += context.getString(R.string.system_file_path_odk_forms);
 			
