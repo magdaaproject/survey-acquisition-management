@@ -31,9 +31,13 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -72,6 +76,8 @@ public class SurveyFormsActivity extends Activity implements OnClickListener {
 	
 	private String categoryId;
 	private String categoryTitle;
+	
+	private boolean locationListening;
 	
 	/*
 	 * (non-Javadoc)
@@ -227,6 +233,11 @@ public class SurveyFormsActivity extends Activity implements OnClickListener {
 			mAlert.show(getFragmentManager(), "missing-odk-form");
 			return;
 		}
+		
+		// do we need to start listening for location updates
+		if(cursor.getInt(cursor.getColumnIndex(FormsContract.Table.USES_LOCATION)) == FormsContract.YES) {
+			startLocationListener();
+		}
 
 		// build a Uri representing data for the form
 		Uri mOdkFormUri = ContentUris.withAppendedId(
@@ -253,6 +264,11 @@ public class SurveyFormsActivity extends Activity implements OnClickListener {
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		
+		// turn off location listener
+		if(locationListening == true) {
+			stopLocationListener();
+		}
+		
 		// check to see if everything went OK
 		if(resultCode != Activity.RESULT_OK) {
 			Log.w(sLogTag, "ODK returned without the Activity.RESULT_OK flag");
@@ -276,6 +292,67 @@ public class SurveyFormsActivity extends Activity implements OnClickListener {
 		}
 		
 	}
+	
+	private void startLocationListener() {
+		
+		// get reference to system wide location manager
+		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		
+		// start requesting location updates
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		
+		locationListening = true;
+		
+	}
+	
+	private void stopLocationListener() {
+		
+		// get reference to system wide location manager
+		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		
+		// stop listening for updates
+		locationManager.removeUpdates(locationListener);
+		
+		locationListening = false;
+	}
+	
+	/*
+	 * basic stub class to use with location services, 
+	 * not really interested in results, rather need to start listening
+	 * as soon as practicable
+	 */
+	private LocationListener locationListener = new LocationListener() {
+
+		/*
+		 * (non-Javadoc)
+		 * @see android.location.LocationListener#onLocationChanged(android.location.Location)
+		 */
+		@Override
+		public void onLocationChanged(Location location) {}
+
+		/*
+		 * (non-Javadoc)
+		 * @see android.location.LocationListener#onProviderDisabled(java.lang.String)
+		 */
+		@Override
+		public void onProviderDisabled(String provider) {}
+
+		/*
+		 * (non-Javadoc)
+		 * @see android.location.LocationListener#onProviderEnabled(java.lang.String)
+		 */
+		@Override
+		public void onProviderEnabled(String provider) {}
+
+		/*
+		 * (non-Javadoc)
+		 * @see android.location.LocationListener#onStatusChanged(java.lang.String, int, android.os.Bundle)
+		 */
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {}
+		
+	};
 
 	/*
 	 * (non-Javadoc)
