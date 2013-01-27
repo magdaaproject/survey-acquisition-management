@@ -48,7 +48,8 @@
 		 android:stretchMode="spacingWidthUniform"
 		 android:gravity="center"
 		 android:layout_below="@id/survey_forms_ui_lbl_header"
-		 android:verticalSpacing="35dp"/>
+		 android:verticalSpacing="35dp"
+		 android:layout_above="@+id/general_ui_btn_back" />
     
     <!-- buttons -->
     <Button
