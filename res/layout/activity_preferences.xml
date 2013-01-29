@@ -35,8 +35,7 @@
         android:id="@+id/android:list"
         android:layout_width="fill_parent"
         android:layout_below="@id/launcher_ui_lbl_header"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/general_ui_btn_back" />
+        android:layout_height="wrap_content" />
     
     <!-- buttons -->
     <Button
