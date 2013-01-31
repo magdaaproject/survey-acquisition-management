@@ -43,8 +43,8 @@ public class LocationService extends Service {
 	//private static final boolean sVerboseLog = true;
 	private static final String sLogTag = "LocationService";
 	
-	private static final int sOneMinute = 1000 * 60 * 1;
-	private static final float sFiveMetres = 5;
+//	private static final int sOneMinute = 1000 * 60 * 1;
+//	private static final float sFiveMetres = 5;
 	
 	/*
 	 * private class level variables
@@ -92,9 +92,9 @@ public class LocationService extends Service {
 		//debug code
 //		Log.d(sLogTag, "is GPS enabled? " + locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
 		
-		// start requesting location updates
-		//locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, sOneMinute, sFiveMetres, locationListener);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, sOneMinute, sFiveMetres, locationListener);
+		// start listening for location updates
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 		
 		locationListening = true;
 	}
