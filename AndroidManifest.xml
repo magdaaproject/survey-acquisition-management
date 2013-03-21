@@ -62,7 +62,8 @@
         </activity>
         <activity 
             android:name=".ConfigManagerActivity"
-            android:label="@string/system_application_default_label"> 
+            android:label="@string/system_application_default_label" 
+            android:launchMode="singleTop"> 
         </activity>
         <activity 
             android:name=".SurveyFormsActivity"
