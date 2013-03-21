@@ -81,11 +81,6 @@ public class LauncherActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_launcher);
 		
-		// populate the device id field
-		TextView mTextView = (TextView) findViewById(R.id.launcher_ui_lbl_device_id);
-		mTextView.setText(String.format(getString(R.string.launcher_ui_lbl_device_id), DeviceUtils.getDeviceId(getApplicationContext())));
-		mTextView = null;
-		
 		// setup the buttons
 		Button mButton = (Button) findViewById(R.id.launcher_ui_btn_settings);
 		mButton.setOnClickListener(this);
@@ -168,6 +163,10 @@ public class LauncherActivity extends Activity implements OnClickListener {
 	
 	private void populateUserInterface() {
 		
+		// populate the device id field
+		TextView mTextView = (TextView) findViewById(R.id.launcher_ui_lbl_device_id);
+		mTextView.setText(String.format(getString(R.string.launcher_ui_lbl_device_id), DeviceUtils.getDeviceId(getApplicationContext())));
+		
 		// check for an available config
 		ContentResolver mContentResolver = this.getContentResolver();
 		
@@ -191,7 +190,7 @@ public class LauncherActivity extends Activity implements OnClickListener {
 		
 		// update the header
 		mCursor.moveToFirst();
-		TextView mTextView = (TextView) findViewById(R.id.launcher_ui_lbl_header);
+		mTextView = (TextView) findViewById(R.id.launcher_ui_lbl_header);
 		mTextView.setText(mCursor.getString(0));
 		
 		// build the list of category data
