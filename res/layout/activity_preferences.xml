@@ -34,7 +34,8 @@
     <ListView
         android:id="@+id/android:list"
         android:layout_width="fill_parent"
-        android:layout_below="@id/launcher_ui_lbl_header"
+        android:layout_below="@id/preferences_ui_lbl_header"
+        android:layout_above="@+id/general_ui_btn_back"
         android:layout_height="wrap_content" />
     
     <!-- buttons -->
@@ -44,7 +45,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:contentDescription="@string/general_ui_btn_back_desc"
-        android:text="@string/general_ui_btn_back_text"/>
+        android:text="@string/general_ui_btn_back_text"
+        />
     
     
 
