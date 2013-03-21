@@ -251,15 +251,23 @@ public class ConfigManagerActivity extends Activity implements OnClickListener {
 	
 	/**
 	 * empty the ODK databases
+	 * 
+	 * @return true if the process is successful
 	 */
-	public void emptyOdkDatabases() {
+	public boolean emptyOdkDatabases() {
 		
 		try {
 			contentResolver.delete(FormsProviderAPI.FormsColumns.CONTENT_URI, null, null);
 			contentResolver.delete(InstanceProviderAPI.InstanceColumns.CONTENT_URI, null, null);
 		} catch (SQLiteException e) {
 			Log.w(sLogTag, "error thrown while trying to empty ODK database", e);
+			return false;
+		} catch (java.lang.NullPointerException e) {
+			Log.w(sLogTag, "error thrown while trying to empty ODK database", e);
+			return false;
 		}
+		
+		return true;
 	}
 	
 	/**

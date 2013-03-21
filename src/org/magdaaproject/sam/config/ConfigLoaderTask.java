@@ -279,18 +279,18 @@ public class ConfigLoaderTask extends AsyncTask<Void, Integer, Integer> {
 			// delete data
 			FileUtils.recursiveDelete(mOdkPath);
 			
-			// recreate directories			
-//			mOdkPath = Environment.getExternalStorageDirectory().getPath();
-//			mOdkPath += context.getString(R.string.system_file_path_odk_instances);
-			
-			// don't delete metadata directory as 
-			// odk process has locked the database files
-			// delete will fail
-//			mOdkPath = Environment.getExternalStorageDirectory().getPath();
-//			mOdkPath += context.getString(R.string.system_file_path_odk_metadata);
-			
 			// empty the database tables via odk instead
-			context.emptyOdkDatabases();
+			// try twice and one second failure, finish with error
+			if(context.emptyOdkDatabases() == false) {
+				if(context.emptyOdkDatabases() == false) {
+					// report on the error
+					publishProgress(
+							R.string.config_manager_ui_dialog_error_title,
+							R.string.config_manager_ui_dialog_unable_delete_odk_message
+							);
+					return Integer.valueOf(sFailure);
+				}
+			}
 			
 			// reset the ODK path variable
 			mOdkPath = Environment.getExternalStorageDirectory().getPath();

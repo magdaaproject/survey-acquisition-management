@@ -90,7 +90,7 @@
     <string name="config_manager_ui_dialog_invalid_config_message">The config index file failed to validate, please check the file and then try again</string>
     <string name="config_manager_ui_dialog_unable_import_config_message">Unable to import the config index, please check the file and then try again</string>
     <string name="config_manager_ui_dialog_unable_extract_forms_message">Unable to extract the forms, please check the config file and try again</string>
-    <string name="config_manager_ui_dialog_unable_delete_odk_message">Unable to delete the existing ODK data, please check the external storage and try again</string>
+    <string name="config_manager_ui_dialog_unable_delete_odk_message">Unable to delete the existing ODK data, please check the external storage, the status of the ODK application, and try again</string>
     <string name="config_manager_ui_dialog_unable_install_new_forms_message">Unable to gather list of new forms, please check the external storage and the config file and try again</string>
     
     <string name="config_manager_ui_dialog_verify_error_title">Form Verification Error</string>
